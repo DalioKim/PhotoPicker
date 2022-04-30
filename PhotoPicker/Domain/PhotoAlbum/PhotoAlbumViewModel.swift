@@ -7,7 +7,6 @@
 
 import RxSwift
 import RxRelay
-import Photos
 import UIKit
 
 
@@ -54,20 +53,19 @@ final class DefaultPhotoAlbumViewModel: PhotoAlbumViewModel {
     // MARK: - Init
     
     init() {
-        fetch()
+        bindFetch()
     }
     
-    private func fetch() {
-        PHPhotoLibrary.requestAuthorization { [weak self] status in
-            if status == .authorized {
-                let assets = PHAsset.fetchAssets(with: .image, options: nil)
+    private func bindFetch() {
+        PHPhotoManager.authorized
+            .subscribe(onNext: { [weak self] _ in
                 var list = [PhotoAlbumItemCellModel]()
-                assets.enumerateObjects { asset, _, _ in
+                PHPhotoManager.assets.enumerateObjects { asset, _, _ in
                     list.append(PhotoAlbumItemCellModel(parentViewModel: self, model: Photo(asset: asset)))
                 }
                 self?.cellModelsRelay.accept(list)
-            }
-        }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
