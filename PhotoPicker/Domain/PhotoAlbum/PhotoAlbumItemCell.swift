@@ -6,9 +6,7 @@
 //
 
 import UIKit
-import RxSwift
 import SnapKit
-import Photos
 
 class PhotoAlbumItemCell: UICollectionViewCell {
     
@@ -63,9 +61,7 @@ extension PhotoAlbumItemCell: Bindable {
     func bind(_ model: Any?) {
         guard let model = model as? PhotoAlbumItemCellModel else { return }
         let targetSize = CGSize(width: contentView.frame.width, height: contentView.frame.height)
-        PHImageManager.default().requestImage(for: model.asset, targetSize: targetSize, contentMode: .aspectFit, options: nil) { [weak self] image, _ in
-            self?.imageView.image = image
-        }
+        imageView.setImage(model.asset, targetSize: targetSize)
     }
 }
 
