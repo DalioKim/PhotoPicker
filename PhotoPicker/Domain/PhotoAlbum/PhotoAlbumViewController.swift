@@ -5,9 +5,8 @@
 //  Created by 김동현 on 2022/04/29.
 //
 
-import Foundation
 import RxSwift
-import Photos
+import UIKit
 
 class PhotoAlbumViewController: UIViewController {
 
@@ -18,21 +17,28 @@ class PhotoAlbumViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
+        
+    private var viewModel: DefaultPhotoAlbumViewModel
+    private let disposeBag = DisposeBag()
+
+    // MARK: - Init
+    
+    init(viewModel: DefaultPhotoAlbumViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getPhtoAlbum()
     }
 
-    private func getPhtoAlbum() {
-        PHPhotoLibrary.authorized
-          .skipWhile { !$0 } // true 값 나올 때까지 skip
-          .take(1) // 처음 true값 받고 나면 종료
-          .subscribe(
-            onNext: { [weak self] _ in
-              guard let self = self else { return }
-            })
+    // MARK: - private
+    
+    private func bindCollectionView() {
+        viewModel.cellModelsObs
     }
 }
 

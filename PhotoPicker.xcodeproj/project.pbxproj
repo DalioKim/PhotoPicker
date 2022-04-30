@@ -13,6 +13,10 @@
 		E3D26C16281BCFE10019CFDE /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D26C15281BCFE10019CFDE /* PhotoAlbumViewController.swift */; };
 		E3D26C1B281BCFE40019CFDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D26C1A281BCFE40019CFDE /* Assets.xcassets */; };
 		E3D26C2E281BDF180019CFDE /* PHPhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D26C2D281BDF180019CFDE /* PHPhotoLibrary.swift */; };
+		E3D26C30281BE43E0019CFDE /* PhotoAlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D26C2F281BE43E0019CFDE /* PhotoAlbumViewModel.swift */; };
+		E3D26C32281BE4580019CFDE /* PhotoAlbumItemCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D26C31281BE4570019CFDE /* PhotoAlbumItemCellModel.swift */; };
+		E3D26C36281D18FA0019CFDE /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D26C35281D18F90019CFDE /* Photo.swift */; };
+		E3D26C38281D2EF20019CFDE /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D26C37281D2EF20019CFDE /* Bindable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +29,10 @@
 		E3D26C1A281BCFE40019CFDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3D26C1F281BCFE40019CFDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3D26C2D281BDF180019CFDE /* PHPhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPhotoLibrary.swift; sourceTree = "<group>"; };
+		E3D26C2F281BE43E0019CFDE /* PhotoAlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewModel.swift; sourceTree = "<group>"; };
+		E3D26C31281BE4570019CFDE /* PhotoAlbumItemCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumItemCellModel.swift; sourceTree = "<group>"; };
+		E3D26C35281D18F90019CFDE /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		E3D26C37281D2EF20019CFDE /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		F4AB400E77EDB862BA3D1E8D /* Pods-PhotoPicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoPicker.debug.xcconfig"; path = "Target Support Files/Pods-PhotoPicker/Pods-PhotoPicker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +98,7 @@
 		E3D26C26281BD1CF0019CFDE /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				E3D26C33281D18AC0019CFDE /* Common */,
 				E3D26C29281BD25B0019CFDE /* PhotoAlbum */,
 				E3D26C2A281BD2610019CFDE /* Picker */,
 			);
@@ -116,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				E3D26C15281BCFE10019CFDE /* PhotoAlbumViewController.swift */,
+				E3D26C2F281BE43E0019CFDE /* PhotoAlbumViewModel.swift */,
+				E3D26C31281BE4570019CFDE /* PhotoAlbumItemCellModel.swift */,
 			);
 			path = PhotoAlbum;
 			sourceTree = "<group>";
@@ -141,6 +152,23 @@
 				E3D26C2D281BDF180019CFDE /* PHPhotoLibrary.swift */,
 			);
 			path = Foundation;
+			sourceTree = "<group>";
+		};
+		E3D26C33281D18AC0019CFDE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E3D26C34281D18B70019CFDE /* Model */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E3D26C34281D18B70019CFDE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E3D26C35281D18F90019CFDE /* Photo.swift */,
+				E3D26C37281D2EF20019CFDE /* Bindable.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		E61136070B17D392341BC957 /* Pods */ = {
@@ -265,10 +293,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3D26C36281D18FA0019CFDE /* Photo.swift in Sources */,
 				E3D26C16281BCFE10019CFDE /* PhotoAlbumViewController.swift in Sources */,
+				E3D26C38281D2EF20019CFDE /* Bindable.swift in Sources */,
+				E3D26C30281BE43E0019CFDE /* PhotoAlbumViewModel.swift in Sources */,
 				E3D26C12281BCFE10019CFDE /* AppDelegate.swift in Sources */,
 				E3D26C2E281BDF180019CFDE /* PHPhotoLibrary.swift in Sources */,
 				E3D26C14281BCFE10019CFDE /* SceneDelegate.swift in Sources */,
+				E3D26C32281BE4580019CFDE /* PhotoAlbumItemCellModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
