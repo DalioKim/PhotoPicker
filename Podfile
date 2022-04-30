@@ -9,7 +9,7 @@ target 'PhotoPicker' do
   pod 'RxSwift'
   pod 'RxRelay'
   pod 'RxCocoa'
-
+  pod 'SnapKit', '~> 5.0.0' 
 
   # Pods for PhotoPicker
 

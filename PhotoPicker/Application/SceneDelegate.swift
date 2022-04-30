@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.backgroundColor = .white
         
-        let navigationController = UINavigationController(rootViewController: PhotoAlbumViewController())
+        let navigationController = UINavigationController(rootViewController: PhotoAlbumViewController(viewModel: DefaultPhotoAlbumViewModel()))
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
