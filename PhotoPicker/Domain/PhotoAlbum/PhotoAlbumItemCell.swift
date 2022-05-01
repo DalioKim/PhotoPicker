@@ -17,6 +17,7 @@ class PhotoAlbumItemCell: UICollectionViewCell {
         static let verticalPadding: CGFloat = 5
         static let spacing: CGFloat = 5
     }
+    
     // MARK: - private
     
     private lazy var stackView: UIStackView = {

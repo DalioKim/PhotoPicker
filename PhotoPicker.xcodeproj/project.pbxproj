@@ -22,6 +22,11 @@
 		E3D26C41281D38630019CFDE /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D26C40281D38630019CFDE /* UIEdgeInsets.swift */; };
 		E3D26C46281D42BB0019CFDE /* PHPhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D26C45281D42BB0019CFDE /* PHPhotoManager.swift */; };
 		E3D26C48281D44EE0019CFDE /* UIImageView+PHPhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D26C47281D44EE0019CFDE /* UIImageView+PHPhotoLibrary.swift */; };
+		E3FD0031281D59550005D310 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD0030281D59550005D310 /* PickerViewController.swift */; };
+		E3FD0033281D59860005D310 /* PickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD0032281D59860005D310 /* PickerViewModel.swift */; };
+		E3FD0049281E33FC0005D310 /* UIImage+Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD0048281E33FC0005D310 /* UIImage+Asset.swift */; };
+		E3FD004B281E43A50005D310 /* PickerItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD004A281E43A50005D310 /* PickerItemCell.swift */; };
+		E3FD004D281E6B810005D310 /* PickerItemCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD004C281E6B810005D310 /* PickerItemCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +48,11 @@
 		E3D26C40281D38630019CFDE /* UIEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsets.swift; sourceTree = "<group>"; };
 		E3D26C45281D42BB0019CFDE /* PHPhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPhotoManager.swift; sourceTree = "<group>"; };
 		E3D26C47281D44EE0019CFDE /* UIImageView+PHPhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+PHPhotoLibrary.swift"; sourceTree = "<group>"; };
+		E3FD0030281D59550005D310 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		E3FD0032281D59860005D310 /* PickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewModel.swift; sourceTree = "<group>"; };
+		E3FD0048281E33FC0005D310 /* UIImage+Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Asset.swift"; sourceTree = "<group>"; };
+		E3FD004A281E43A50005D310 /* PickerItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerItemCell.swift; sourceTree = "<group>"; };
+		E3FD004C281E6B810005D310 /* PickerItemCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerItemCellModel.swift; sourceTree = "<group>"; };
 		F4AB400E77EDB862BA3D1E8D /* Pods-PhotoPicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoPicker.debug.xcconfig"; path = "Target Support Files/Pods-PhotoPicker/Pods-PhotoPicker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +128,7 @@
 		E3D26C27281BD1DE0019CFDE /* Helper  */ = {
 			isa = PBXGroup;
 			children = (
+				E3FD003D281D90D00005D310 /* ResourcesGenerator */,
 				E3D26C44281D42920019CFDE /* Util */,
 				E3D26C2B281BDED30019CFDE /* Extensions */,
 			);
@@ -146,6 +157,10 @@
 		E3D26C2A281BD2610019CFDE /* Picker */ = {
 			isa = PBXGroup;
 			children = (
+				E3FD0030281D59550005D310 /* PickerViewController.swift */,
+				E3FD0032281D59860005D310 /* PickerViewModel.swift */,
+				E3FD004A281E43A50005D310 /* PickerItemCell.swift */,
+				E3FD004C281E6B810005D310 /* PickerItemCellModel.swift */,
 			);
 			path = Picker;
 			sourceTree = "<group>";
@@ -202,6 +217,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		E3FD003D281D90D00005D310 /* ResourcesGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				E3FD0048281E33FC0005D310 /* UIImage+Asset.swift */,
+			);
+			path = ResourcesGenerator;
+			sourceTree = "<group>";
+		};
 		E61136070B17D392341BC957 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +246,7 @@
 				E3D26C0B281BCFE10019CFDE /* Frameworks */,
 				E3D26C0C281BCFE10019CFDE /* Resources */,
 				724CB21601700C3E1313E967 /* [CP] Embed Pods Frameworks */,
+				E3FD0047281E33490005D310 /* SwiftGen */,
 			);
 			buildRules = (
 			);
@@ -317,6 +341,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhotoPicker/Pods-PhotoPicker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E3FD0047281E33490005D310 /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "xcassets:\n  inputs:\n    - Resources/Images.xcassets\n  outputs:\n    - templateName: swift5\n      output: Generated/Assets.swift\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -330,12 +372,17 @@
 				E3D26C38281D2EF20019CFDE /* Bindable.swift in Sources */,
 				E3D26C30281BE43E0019CFDE /* PhotoAlbumViewModel.swift in Sources */,
 				E3D26C12281BCFE10019CFDE /* AppDelegate.swift in Sources */,
+				E3FD004D281E6B810005D310 /* PickerItemCellModel.swift in Sources */,
 				E3D26C46281D42BB0019CFDE /* PHPhotoManager.swift in Sources */,
 				E3D26C48281D44EE0019CFDE /* UIImageView+PHPhotoLibrary.swift in Sources */,
 				E3D26C3F281D34FD0019CFDE /* UICollectionViewLayout+SectionInsets.swift in Sources */,
 				E3D26C14281BCFE10019CFDE /* SceneDelegate.swift in Sources */,
 				E3D26C3C281D34C60019CFDE /* NSObject+ClassName.swift in Sources */,
 				E3D26C3A281D30380019CFDE /* PhotoAlbumItemCell.swift in Sources */,
+				E3FD0049281E33FC0005D310 /* UIImage+Asset.swift in Sources */,
+				E3FD0033281D59860005D310 /* PickerViewModel.swift in Sources */,
+				E3FD004B281E43A50005D310 /* PickerItemCell.swift in Sources */,
+				E3FD0031281D59550005D310 /* PickerViewController.swift in Sources */,
 				E3D26C32281BE4580019CFDE /* PhotoAlbumItemCellModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

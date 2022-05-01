@@ -9,7 +9,6 @@ import RxSwift
 import RxRelay
 import UIKit
 
-
 protocol PhotoAlbumViewModelInput {
     func didSelectItem(_ model: PhotoAlbumItemCellModel)
 }
@@ -24,11 +23,11 @@ protocol PhotoAlbumViewModelOutput {
 protocol PhotoAlbumViewModel: PhotoAlbumViewModelInput, PhotoAlbumViewModelOutput {}
 
 final class DefaultPhotoAlbumViewModel: PhotoAlbumViewModel {
-    typealias ViewAction = DefaultMovieListViewAction
+    typealias ViewAction = DefaultPhotoAlbumViewAction
     
-    enum DefaultMovieListViewAction {
+    enum DefaultPhotoAlbumViewAction {
         case popViewController
-        case showPickerView
+        case showPickerView(model: PhotoAlbumItemCellModel)
     }
     
     // MARK: - Relay & Observer
@@ -73,6 +72,6 @@ final class DefaultPhotoAlbumViewModel: PhotoAlbumViewModel {
 
 extension DefaultPhotoAlbumViewModel {
     func didSelectItem(_ model: PhotoAlbumItemCellModel) {
-        viewActionRelay.accept(ViewAction.showPickerView)
+        viewActionRelay.accept(ViewAction.showPickerView(model: model))
     }
 }
