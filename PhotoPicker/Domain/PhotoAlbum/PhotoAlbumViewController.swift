@@ -39,6 +39,7 @@ class PhotoAlbumViewController: UIViewController {
         
         setupViews()
         bindCollectionView()
+        bindViewAction()
     }
 
     // MARK: - private
@@ -60,6 +61,27 @@ class PhotoAlbumViewController: UIViewController {
                 (cell as? Bindable).map { $0.bind(cellModel) }
                 return cell
             }
+            .disposed(by: disposeBag)
+        
+        collectionView.rx.modelSelected(PhotoAlbumItemCellModel.self)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.didSelectItem($0)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindViewAction() {
+        viewModel.viewActionObs
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                switch $0 {
+                case .showPickerView(let cellModel):
+                    let vc = PickerViewController(viewModel: DefaultPickerViewModel(model: cellModel))
+                    self.navigationController?.pushViewController(vc, animated: true)
+                case .popViewController:
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
             .disposed(by: disposeBag)
     }
 }
