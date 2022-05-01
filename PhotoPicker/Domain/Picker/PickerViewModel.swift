@@ -64,7 +64,7 @@ extension DefaultPickerViewModel {
     func didSelectItem(_ model: PickerItemCellModel, targetSize: CGSize) {
         PHPhotoManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: nil)
             .subscribe(onNext: { [weak self] in
-                self?.mergedImageRelay.accept($0.mergeWith(topImage: model.image))
+                self?.mergedImageRelay.accept($0.mergeWith(subImage: model.image))
             })
             .dispose()
     }

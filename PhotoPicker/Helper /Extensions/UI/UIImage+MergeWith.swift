@@ -8,20 +8,21 @@
 import UIKit
 
 extension UIImage {
-  func mergeWith(topImage: UIImage) -> UIImage {
-    let bottomImage = self
-
-    UIGraphicsBeginImageContext(size)
-
-
-    let areaSize = CGRect(x: 0, y: 0, width: bottomImage.size.width, height: bottomImage.size.height)
-    bottomImage.draw(in: areaSize)
-
-    topImage.draw(in: areaSize, blendMode: .normal, alpha: 1.0)
-
-    let mergedImage = UIGraphicsGetImageFromCurrentImageContext()!
-    UIGraphicsEndImageContext()
-    return mergedImage
-  }
+    func mergeWith(subImage: UIImage) -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        
+        let subWidthSize = self.size.width / 2
+        let subHeightSize = self.size.height / 2
+        subImage.draw(in: CGRect(x: (self.size.width - subWidthSize) / 2.0, y: (self.size.height - subHeightSize) / 2.0, width: subWidthSize, height: subHeightSize), blendMode: .normal, alpha: 1.0)
+        
+        if let mergedImage = UIGraphicsGetImageFromCurrentImageContext() {
+            UIGraphicsEndImageContext()
+            return mergedImage
+        } else {
+            return UIImage()
+        }
+    }
 }
 
