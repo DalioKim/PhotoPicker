@@ -74,6 +74,7 @@ class PickerViewController: UIViewController {
     private func bind() {
         bindImage()
         bindCollectionView()
+        bindMergedImage()
     }
     
     private func bindImage() {
@@ -90,6 +91,22 @@ class PickerViewController: UIViewController {
                 (cell as? Bindable).map { $0.bind(cellModel) }
                 return cell
             }
+            .disposed(by: disposeBag)
+        
+        collectionView.rx.modelSelected(PickerItemCellModel.self)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let targetSize = CGSize(width: self.imageView.bounds.width / 2, height: self.imageView.bounds.height / 2)
+                self.viewModel.didSelectItem($0, targetSize: targetSize)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindMergedImage() {
+        viewModel.mergedImageObs
+            .subscribe(onNext: { [weak self] in
+                self?.imageView.image = $0
+            })
             .disposed(by: disposeBag)
     }
 }

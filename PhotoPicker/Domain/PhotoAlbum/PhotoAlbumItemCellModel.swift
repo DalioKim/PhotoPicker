@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Photos
 
 class PhotoAlbumItemCellModel {
     private weak var parentViewModel: DefaultPhotoAlbumViewModel?
@@ -19,7 +18,7 @@ class PhotoAlbumItemCellModel {
 }
 
 extension PhotoAlbumItemCellModel {
-    var asset: PHAsset {
+    var asset: PHPhotoManager.asset {
         model.asset
     }
 }
