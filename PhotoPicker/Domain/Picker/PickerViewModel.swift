@@ -7,16 +7,15 @@
 
 import RxSwift
 import RxRelay
-import UIKit
-import Photos
 
 protocol PickerViewModelInput {
-    func didSelectItem(_ model: PhotoAlbumItemCellModel)
+    func didSelectItem(_ model: PickerItemCellModel, targetSize: CGSize)
 }
 
 protocol PickerViewModelOutput {
     associatedtype ViewAction
     var cellModelsObs: Observable<[PickerItemCellModel]> { get }
+    var mergedImageObs: Observable<UIImage> { get }
 }
 
 protocol PickerViewModel: PickerViewModelInput, PickerViewModelOutput {}
@@ -31,9 +30,14 @@ final class DefaultPickerViewModel: PickerViewModel {
     
     private let model: PhotoAlbumItemCellModel
     private let cellModelsRelay = BehaviorRelay<[PickerItemCellModel]?>(value: nil)
+    private let mergedImageRelay = BehaviorRelay<UIImage?>(value: nil)
     
     var cellModelsObs: Observable<[PickerItemCellModel]> {
         cellModelsRelay.map { $0 ?? [] }
+    }
+    
+    var mergedImageObs: Observable<UIImage> {
+        mergedImageRelay.map { $0 ?? UIImage() }
     }
     
     // MARK: - Init
@@ -49,7 +53,7 @@ final class DefaultPickerViewModel: PickerViewModel {
 }
 
 extension DefaultPickerViewModel {
-    var asset: PHAsset {
+    var asset: PHPhotoManager.asset {
         model.asset
     }
 }
@@ -57,6 +61,11 @@ extension DefaultPickerViewModel {
 // MARK: - INPUT. View event methods
 
 extension DefaultPickerViewModel {
-    func didSelectItem(_ model: PhotoAlbumItemCellModel) {
+    func didSelectItem(_ model: PickerItemCellModel, targetSize: CGSize) {
+        PHPhotoManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: nil)
+            .subscribe(onNext: { [weak self] in
+                self?.mergedImageRelay.accept($0.mergeWith(topImage: model.image))
+            })
+            .dispose()
     }
 }

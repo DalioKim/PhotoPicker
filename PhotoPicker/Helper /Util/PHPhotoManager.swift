@@ -10,6 +10,7 @@ import RxSwift
 import Photos
 
 class PHPhotoManager: PHPhotoLibrary {
+    typealias asset = PHAsset
     static var authorized: Observable<Bool> {
         
         return Observable.create { observer in
@@ -36,5 +37,9 @@ class PHPhotoManager: PHPhotoLibrary {
     
     static var assets: PHFetchResult<PHAsset> {
         return PHAsset.fetchAssets(with: .image, options: nil)
+    }
+    
+    static func requestImage(for asset: PHAsset, targetSize: CGSize, contentMode: PHImageContentMode, options: PHImageRequestOptions?) -> Observable<(UIImage)> {
+        return PHImageManager.default().rx.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: nil)
     }
 }
