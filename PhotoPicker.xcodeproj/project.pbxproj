@@ -246,7 +246,6 @@
 				E3D26C0B281BCFE10019CFDE /* Frameworks */,
 				E3D26C0C281BCFE10019CFDE /* Resources */,
 				724CB21601700C3E1313E967 /* [CP] Embed Pods Frameworks */,
-				E3FD0047281E33490005D310 /* SwiftGen */,
 			);
 			buildRules = (
 			);
@@ -340,24 +339,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhotoPicker/Pods-PhotoPicker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		E3FD0047281E33490005D310 /* SwiftGen */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftGen;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "xcassets:\n  inputs:\n    - Resources/Images.xcassets\n  outputs:\n    - templateName: swift5\n      output: Generated/Assets.swift\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

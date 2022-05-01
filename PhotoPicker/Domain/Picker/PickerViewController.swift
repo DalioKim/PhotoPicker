@@ -25,7 +25,6 @@ class PickerViewController: UIViewController {
         collectionView.snp.makeConstraints {
             $0.trailing.leading.equalToSuperview().inset(10)
         }
-        
         return stackView
     }()
     
@@ -61,14 +60,12 @@ class PickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
         bind()
     }
     
     private func setupViews() {
         view.addSubview(stackView)
-        
         stackView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -101,9 +98,7 @@ class PickerViewController: UIViewController {
 
 extension PickerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.size.width - collectionViewLayout.sectionInsets.horizontal
         let height = collectionView.frame.size.height - collectionViewLayout.sectionInsets.vertical
-        print("width \(width) height \(height)")
         return PickerItemCell.size(height: height)
     }
 }
