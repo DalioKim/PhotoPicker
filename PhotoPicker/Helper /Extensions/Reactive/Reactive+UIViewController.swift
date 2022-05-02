@@ -36,4 +36,27 @@ extension UIViewController {
             }
         }
     }
+    
+    func showAlert(title : String, message: String) -> Observable<Bool> {
+        return Observable.create { [weak self] observer in
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+                observer.onNext(true)
+                observer.onCompleted()
+            }
+            let cancleAction = UIAlertAction(title: "취소", style: .default) { _ in
+                observer.onNext(false)
+                observer.onCompleted()
+            }
+            
+            alertController.addAction(okAction)
+            alertController.addAction(cancleAction)
+            
+            self?.present(alertController, animated: true, completion: nil)
+            
+            return Disposables.create {
+                alertController.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }

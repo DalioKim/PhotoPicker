@@ -12,7 +12,7 @@ import RxCocoa
 
 extension Reactive where Base: PHImageManager {
     public func requestImage(for asset: PHAsset, targetSize: CGSize, contentMode: PHImageContentMode, options: PHImageRequestOptions?) -> Observable<(UIImage)> {
-
+        
         return Observable.create({ [weak manager = self.base] (observer) -> Disposable in
             guard let manager = manager else {
                 observer.onCompleted()
