@@ -29,6 +29,7 @@
 		E3FD004D281E6B810005D310 /* PickerItemCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD004C281E6B810005D310 /* PickerItemCellModel.swift */; };
 		E3FD004F281EE5040005D310 /* UIImage+MergeWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD004E281EE5040005D310 /* UIImage+MergeWith.swift */; };
 		E3FD0052281EE97A0005D310 /* Reactive+PHImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD0051281EE97A0005D310 /* Reactive+PHImageManager.swift */; };
+		E3FD0054282005DD0005D310 /* Reactive+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD0053282005DD0005D310 /* Reactive+UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		E3FD004C281E6B810005D310 /* PickerItemCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerItemCellModel.swift; sourceTree = "<group>"; };
 		E3FD004E281EE5040005D310 /* UIImage+MergeWith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+MergeWith.swift"; sourceTree = "<group>"; };
 		E3FD0051281EE97A0005D310 /* Reactive+PHImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+PHImageManager.swift"; sourceTree = "<group>"; };
+		E3FD0053282005DD0005D310 /* Reactive+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+UIViewController.swift"; sourceTree = "<group>"; };
 		F4AB400E77EDB862BA3D1E8D /* Pods-PhotoPicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoPicker.debug.xcconfig"; path = "Target Support Files/Pods-PhotoPicker/Pods-PhotoPicker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				E3FD0051281EE97A0005D310 /* Reactive+PHImageManager.swift */,
+				E3FD0053282005DD0005D310 /* Reactive+UIViewController.swift */,
 			);
 			path = Reactive;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				E3FD0033281D59860005D310 /* PickerViewModel.swift in Sources */,
 				E3FD004B281E43A50005D310 /* PickerItemCell.swift in Sources */,
 				E3FD0031281D59550005D310 /* PickerViewController.swift in Sources */,
+				E3FD0054282005DD0005D310 /* Reactive+UIViewController.swift in Sources */,
 				E3D26C32281BE4580019CFDE /* PhotoAlbumItemCellModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
