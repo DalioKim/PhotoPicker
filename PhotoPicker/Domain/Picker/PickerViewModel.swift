@@ -10,10 +10,10 @@ import RxRelay
 
 protocol PickerViewModelInput {
     func didSelectItem(_ model: PickerItemCellModel, targetSize: CGSize)
+    func saveMergedImage()
 }
 
 protocol PickerViewModelOutput {
-    associatedtype ViewAction
     var cellModelsObs: Observable<[PickerItemCellModel]> { get }
     var mergedImageObs: Observable<UIImage> { get }
 }
@@ -21,16 +21,13 @@ protocol PickerViewModelOutput {
 protocol PickerViewModel: PickerViewModelInput, PickerViewModelOutput {}
 
 final class DefaultPickerViewModel: PickerViewModel {
-    typealias ViewAction = DefaultPickerViewAction
-    
-    enum DefaultPickerViewAction {
-        case popViewController
-        case showPickerView
-    }
-    
     private let model: PhotoAlbumItemCellModel
+    
     private let cellModelsRelay = BehaviorRelay<[PickerItemCellModel]?>(value: nil)
     private let mergedImageRelay = BehaviorRelay<UIImage?>(value: nil)
+    private let saveMergedImageRelay = PublishRelay<UIImage?>()
+    
+    private let disposeBag = DisposeBag()
     
     var cellModelsObs: Observable<[PickerItemCellModel]> {
         cellModelsRelay.map { $0 ?? [] }
@@ -45,10 +42,20 @@ final class DefaultPickerViewModel: PickerViewModel {
     init(model: PhotoAlbumItemCellModel) {
         self.model = model
         bind()
+        bindSaveImage()
     }
     
     private func bind() {
         cellModelsRelay.accept(UIImage.Asset.allCases.map { PickerItemCellModel(parentViewModel: self, image: $0.image) })
+    }
+    
+    private func bindSaveImage() {
+        saveMergedImageRelay
+            .subscribe(onNext: { image in
+                guard let image = image else { return }
+                PHPhotoManager.saveImage(image)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -67,5 +74,9 @@ extension DefaultPickerViewModel {
                 self?.mergedImageRelay.accept($0.mergeWith(subImage: model.image))
             })
             .dispose()
+    }
+    
+    func saveMergedImage() {
+        saveMergedImageRelay.accept(mergedImageRelay.value)
     }
 }
