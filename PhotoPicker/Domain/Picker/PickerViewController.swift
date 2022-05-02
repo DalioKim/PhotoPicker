@@ -45,6 +45,11 @@ class PickerViewController: UIViewController {
         return collectionView
     }()
     
+    private let saveImageButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "사진 저장하기", style: .plain, target: self, action: nil)
+        return button
+    }()
+    
     private var viewModel: DefaultPickerViewModel
     private let disposeBag = DisposeBag()
     
@@ -73,6 +78,7 @@ class PickerViewController: UIViewController {
     
     private func bind() {
         bindImage()
+        bindSaveButton()
         bindCollectionView()
         bindMergedImage()
     }
@@ -106,6 +112,20 @@ class PickerViewController: UIViewController {
         viewModel.mergedImageObs
             .subscribe(onNext: { [weak self] in
                 self?.imageView.image = $0
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindSaveButton() {
+        rx.methodInvoked(#selector(viewWillAppear(_:)))
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationItem.rightBarButtonItem = self?.saveImageButton
+            })
+            .disposed(by: disposeBag)
+        
+        saveImageButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.saveMergedImage()
             })
             .disposed(by: disposeBag)
     }

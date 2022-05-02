@@ -29,4 +29,19 @@ class PHPhotoManager: PHPhotoLibrary {
         return Disposables.create()
       }
     }
+    
+    static func saveImage(_ mergedImage: UIImage) {
+        PHPhotoManager.requestPhoto()
+            .subscribe(onNext: { _ in
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAsset(from: mergedImage)
+                }, completionHandler: { success, error -> Void in
+                    if let err = error {
+                        
+                    } else {
+                        
+                    }
+                })
+            })
+    }
 }
