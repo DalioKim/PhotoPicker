@@ -9,7 +9,7 @@ import RxSwift
 import RxRelay
 
 protocol PickerViewModelInput {
-    func didSelectItem(_ model: PickerItemCellModel, targetSize: CGSize)
+    func didSelectItem(_ model: PickerItemCellModel, targetSize: CGSize, grade: CGFloat)
     func saveMergedImage()
 }
 
@@ -68,12 +68,12 @@ extension DefaultPickerViewModel {
 // MARK: - INPUT. View event methods
 
 extension DefaultPickerViewModel {
-    func didSelectItem(_ model: PickerItemCellModel, targetSize: CGSize) {
+    func didSelectItem(_ model: PickerItemCellModel, targetSize: CGSize, grade: CGFloat) {
         PHPhotoManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: nil)
             .subscribe(onNext: { [weak self] in
-                self?.mergedImageRelay.accept($0.mergeWith(subImage: model.image))
+                self?.mergedImageRelay.accept($0.mergeWith(subImage: model.image, grade: grade))
             })
-            .dispose()
+            .disposed(by: disposeBag)
     }
     
     func saveMergedImage() {

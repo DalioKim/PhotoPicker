@@ -1,5 +1,5 @@
 //
-//  UIImage+ MergeWith.swift
+//  UIImage+MergeWith.swift
 //  PhotoPicker
 //
 //  Created by 김동현 on 2022/05/02.
@@ -8,9 +8,8 @@
 import UIKit
 
 extension UIImage {
-    func mergeWith(subImage: UIImage) -> UIImage {
-        UIGraphicsBeginImageContext(size)
-        
+    func mergeWith(subImage: UIImage, grade: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, grade)
         self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         
         let subWidthSize = self.size.width / 2

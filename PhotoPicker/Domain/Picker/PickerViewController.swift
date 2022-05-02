@@ -100,10 +100,15 @@ class PickerViewController: UIViewController {
             .disposed(by: disposeBag)
         
         collectionView.rx.modelSelected(PickerItemCellModel.self)
-            .subscribe(onNext: { [weak self] in
+            .subscribe(onNext: { [weak self] image in
                 guard let self = self else { return }
                 let targetSize = CGSize(width: self.imageView.bounds.width / 2, height: self.imageView.bounds.height / 2)
-                self.viewModel.didSelectItem($0, targetSize: targetSize)
+                self.showAlert(title: "해상도를 선택해주세요")
+                    .subscribe(onNext: { [weak self] grade in
+                        guard let self = self else { return }
+                        self.viewModel.didSelectItem(image, targetSize: targetSize, grade: grade)
+                    })
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
     }
