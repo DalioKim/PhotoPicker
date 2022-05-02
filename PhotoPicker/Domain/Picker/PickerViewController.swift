@@ -67,6 +67,7 @@ class PickerViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         bind()
+        bindViewAction()
     }
     
     private func setupViews() {
@@ -131,6 +132,25 @@ class PickerViewController: UIViewController {
         saveImageButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.saveMergedImage()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindViewAction() {
+        viewModel.viewActionObs
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                switch $0 {
+                case .showPhotoAlbumView:
+                    self.showAlert(title: "이미지 저장완료", message: "메인화면으로 가시겠습니까?")
+                        .subscribe(onNext: { [weak self] _ in
+                            guard let self = self else { return }
+                            let vc = PhotoAlbumViewController(viewModel: DefaultPhotoAlbumViewModel())
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
+                        .disposed(by: self.disposeBag)
+                }
             })
             .disposed(by: disposeBag)
     }

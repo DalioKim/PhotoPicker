@@ -14,18 +14,27 @@ protocol PickerViewModelInput {
 }
 
 protocol PickerViewModelOutput {
+    associatedtype ViewAction
     var cellModelsObs: Observable<[PickerItemCellModel]> { get }
     var mergedImageObs: Observable<UIImage> { get }
+    var viewActionObs: Observable<ViewAction> { get }
 }
 
 protocol PickerViewModel: PickerViewModelInput, PickerViewModelOutput {}
 
 final class DefaultPickerViewModel: PickerViewModel {
+    typealias ViewAction = DefaultPickerViewAction
+    
+    enum DefaultPickerViewAction {
+        case showPhotoAlbumView
+    }
+    
     private let model: PhotoAlbumItemCellModel
     
     private let cellModelsRelay = BehaviorRelay<[PickerItemCellModel]?>(value: nil)
     private let mergedImageRelay = BehaviorRelay<UIImage?>(value: nil)
     private let saveMergedImageRelay = PublishRelay<UIImage?>()
+    private let viewActionRelay = PublishRelay<ViewAction>()
     
     private let disposeBag = DisposeBag()
     
@@ -35,6 +44,10 @@ final class DefaultPickerViewModel: PickerViewModel {
     
     var mergedImageObs: Observable<UIImage> {
         mergedImageRelay.map { $0 ?? UIImage() }
+    }
+    
+    var viewActionObs: Observable<ViewAction> {
+        viewActionRelay.asObservable()
     }
     
     // MARK: - Init
@@ -51,9 +64,14 @@ final class DefaultPickerViewModel: PickerViewModel {
     
     private func bindSaveImage() {
         saveMergedImageRelay
-            .subscribe(onNext: { image in
+            .subscribe(onNext: { [weak self] image in
+                guard let self = self else { return }
                 guard let image = image else { return }
                 PHPhotoManager.saveImage(image)
+                    .subscribe(onNext: { [weak self] image in
+                        self?.viewActionRelay.accept(ViewAction.showPhotoAlbumView)
+                    })
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
     }
