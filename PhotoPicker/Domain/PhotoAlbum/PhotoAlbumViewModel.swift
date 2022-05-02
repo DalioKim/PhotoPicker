@@ -56,7 +56,7 @@ final class DefaultPhotoAlbumViewModel: PhotoAlbumViewModel {
     }
     
     private func bindFetch() {
-        PHPhotoManager.authorized
+        PHPhotoManager.requestPhoto()
             .subscribe(onNext: { [weak self] _ in
                 var list = [PhotoAlbumItemCellModel]()
                 PHPhotoManager.assets.enumerateObjects { asset, _, _ in
